@@ -48,8 +48,7 @@ app.route('/articles/:specificArticle')
     Article.findOne({title: req.params.specificArticle}).then((doc)=>{if(doc.title===null){res.send(null)}else{res.send(doc)}}).catch((err)=>{res.send(err)});          
 })
 .put(function(req,res){
-    
-    Article.updateOne({title: req.params.specificArticle},{title: req.body.title, content: req.body.content},function(err){
+   Article.findOneAndUpdate({title: req.params.specificArticle},{title: req.body.title, content: req.body.content},{overwrite: true},function(err){
         if(err){
             res.send(err);
         } else {
